@@ -41,5 +41,7 @@ audio.addEventListener('playing', () => {
 });
 
 volume.addEventListener('change', () => {
+  console.log(volume.valueAsNumber);
+
   audio.volume = volume.valueAsNumber / 100;
 });

@@ -12,7 +12,7 @@ body {
   min-width: 320px;
   font-family: 'Helvetica', Arial, sans-serif;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 12px;
   line-height: 1.2;
   margin: 0;
   padding: 0;
@@ -63,18 +63,27 @@ button {
   display: flex;
   align-items: flex-end;
   gap: 30px;
+  margin: 0 30px;
 }
 
 .player {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 8px;
+}
+
+.player__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .player__play-button {
   position: relative;
   width: 80px;
   height: 80px;
+  min-width: 80px;
   cursor: pointer;
 }
 
@@ -82,7 +91,7 @@ button {
   position: absolute;
   top: 0;
   left: 0;
-  transition: opacity 0.2s linear;
+  transition: opacity 0.1s linear;
 }
 
 .hidden {
@@ -99,9 +108,83 @@ button {
 }
 
 .player__meta-artist {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .player__streaming {
   display: none;
+}
+
+.player__volume-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+input[type='range'] {
+  overflow: hidden;
+  width: 200px;
+  -webkit-appearance: none;
+  background-color: transparent;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+  height: 6px;
+  width: 100%;
+  -webkit-appearance: none;
+  background: #fff;
+  cursor: pointer;
+}
+
+input[type='range']::-moz-range-track {
+  height: 6px;
+  width: 100%;
+  -webkit-appearance: none;
+  background: #fff;
+  cursor: pointer;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  width: 0;
+  -webkit-appearance: none;
+  height: 6px;
+  cursor: pointer;
+  box-shadow: -200px 0 0 200px #7092bf;
+}
+
+input[type='range']::-moz-range-thumb {
+  width: 0;
+  border: none;
+  cursor: pointer;
+}
+
+input[type='range']::-moz-range-progress {
+  height: 6px;
+  background-color: #7092bf;
+  cursor: pointer;
+}
+
+input[type='range']::-moz-range-track {
+  background-color: #fff;
+  cursor: pointer;
+}
+
+@media (max-width: 767px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .player {
+    width: 100%;
+    flex-direction: row;
+  }
+
+  .player__wrapper {
+    flex-grow: 1;
+  }
+
+  input[type='range'] {
+    flex-grow: 1;
+  }
 }
