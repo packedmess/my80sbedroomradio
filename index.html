@@ -1,0 +1,509 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>My 80s Bedroom Radio</title>
+		<link rel="shortcut icon" href="/pics/favicon.ico" type="image/x-icon">
+		<meta name="keywords" content="80s, eighties, online radio, radio, new wave, post-punk, coldwave, NDW, synthpop, minimal wave, new romantic, neue deutsche welle, tapes, bedroom">
+		<meta name="description" content="80s new wave, post-punk and synthpop online radio.">
+		<link rel="stylesheet" type="text/css" href="css/html5-doctor-reset-stylesheet.min.css">
+		<link rel="stylesheet" type="text/css" href="css/jquery.bxslider.css">
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<link rel="stylesheet" type="text/css" href="css/spinkit.css">
+		<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+		<link rel="stylesheet" type="text/css" href="css/jquery-ui.structure.css">
+		<link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src="js/jquery.bxslider.js"></script>
+		<script src="js/jquery.easing.1.3.js"></script>
+		<script src="js/jquery-ui.js"></script>
+		<script src="js/jquery.mousewheel.js"></script>
+		<script src="js/status-widget.js"></script>
+		<script type="text/javascript" src="js/jquery.jplayer.min.js"></script>
+		<script type="text/javascript" src="js/rt_pl.js"></script>
+		<script>$(document).ready( function(){ new RTPlayer( 3, 80, 0, "http://radio.my80sbedroomradio.com:8080",  "mp3", {"mp3": "http://radio.my80sbedroomradio.com:8010/radio"})  });</script>
+		<script>$(document).ready( function(){ new RTPlayer( 4, 80, 0, "http://radio.my80sbedroomradio.com:8080",  "mp3", {"mp3": "http://radio.my80sbedroomradio.com:8020/radio"})  });</script>
+		<script>$(document).ready( function(){ new RTPlayer( 1, 80, 0, "http://radio.my80sbedroomradio.com:8080",  "mp3", {"mp3": "http://radio.my80sbedroomradio.com:8000/radio"})  });</script>
+		<script src="http://yandex.st/jquery/tmpl/1.0.0pre/jquery.tmpl.min.js"></script>
+		<script>
+		jQuery(document).ready(function(){
+			new StatusWidget({
+				"djImage": false, "djName": false, "listenersNum": false, "trackCurrent": true, "history": false, "widgetWidth": 350}, 1, "http://radio.my80sbedroomradio.com:8080", "#RTWidgetStatus", "ru");
+			});
+		</script>
+		<script type="text/javascript">
+				$(window).load(function() {
+					$('#preloader').delay(800).fadeOut('slow');
+				})
+		</script>
+		<script>
+			$(window).load(function() {
+			var dir = "images/album/thumbs/";
+			var fileextension = ".jpg";
+			i = 0;
+			$.ajax({
+			url: dir,
+			success: function (data) {
+			$(data).find("a:contains(" + fileextension + ")").each(function () {
+			var filename = this.href.replace(window.location.host, "").replace("http:///", "");
+			filename = 'images/album/thumbs/'+filename;
+			if(i!=0){
+			
+				if (i<=9) {
+					$("#pager").append($('<a class="pager-a" data-slide-index="'+i+'" href="#"><img class="pager-img" src=' +  filename + "></img></a>"));
+				}else{
+					$("#pager").append($('<a class="pager-a" style="display:none;" data-slide-index="'+i+'" href="#"><img class="pager-img" src=' +  filename + "></img></a>"));
+				}
+				}else{
+					$("#pager").append($('<a class="pager-a activated" data-slide-index="'+i+'" href="" ><img class="pager-img" src=' +  filename + "></img></a>"));
+				}
+			i++;
+			});
+			}
+			});
+			$('#player_control').click(function () {
+				$('.fa-play').toggleClass('fa-stop');
+			});
+			setTimeout(function () {
+				var slider = $('.bxslider').bxSlider({
+					pagerCustom: '#pager',
+					mode: 'fade'
+				});
+			}, 300);
+				
+				$('.pager-img').click(function () {
+					$('.bx-pager').addClass('clicked down');
+					$('.bx-wrapper').show();
+					$('html, body').animate({
+				scrollTop: $("#bx-pager").offset().top
+					}, 'slow');
+				});
+				$( "#slider" ).slider({range: "min",
+			animate: false,
+			value:80}
+			);
+			$('#slider-next').click(function (e) {
+					e.preventDefault();
+					var src = [];
+					var act;
+					$('#pager a').each(function (i) {
+						src.push($(this).attr("data-slide-index"));
+						if ($(this).hasClass('activated')){
+							act = i;
+						}
+					});
+					if (act==0){
+						act = src.length;
+					}
+					act--;
+					$('#pager a').each(function (i) {
+						$(this).attr("data-slide-index", src[i + 1]);
+						if (i == src.length - 1) {
+							$(this).attr("data-slide-index", src[0]);
+						}
+						if (i == act) {
+							$('#pager a.activated').removeClass('activated');
+							$(this).addClass('activated');
+						}
+						setTimeout(function () {
+							$(this).removeClass('animated flipOutX');
+							$(this).addClass('animated flipInX');
+						}, 1000);
+					});
+					var src = [];
+					$('.bxslider li').each(function (i) {
+						src.push($(this).html());
+					});
+					$('.bxslider li img').each(function (i) {
+						$(this).html(src[i + 1]);
+						if (i == src.length - 1) {
+							$(this).html(src[0]);
+						};
+					});
+					var src = [];
+					$('#pager a img').each(function (i) {
+						src.push($(this).attr("src"));
+					});
+					$('#pager a img').each(function (i) {
+						$(this).attr("src", src[i + 1]);
+						if (i == src.length - 1) {
+							$(this).attr("src", src[0]);
+						};
+					});
+					var q = parseInt($('#pager').attr('data-count'));
+					$('#pager').attr('data-count', q-1);
+					if (q==-1 * (src.length - 1))
+						$('#pager').attr('data-count', 0);
+			});
+			$('#slider-prev').click(function (e) {
+				e.preventDefault();
+					var src = [];
+					var act;
+					$('#pager a').each(function (i) {
+						src.push($(this).attr("data-slide-index"));
+						if ($(this).hasClass('activated')){
+							act = i;
+						}
+					});
+					if (act==src.length - 1){
+						act = -1;
+					}
+					act++;
+					$('#pager a').each(function (i) {
+						$(this).attr("data-slide-index", src[i - 1]);
+						if (i == 0) {
+							$(this).attr("data-slide-index", src[src.length - 1]);
+						}
+						if (i == act) {
+							$('#pager a.activated').removeClass('activated');
+							$(this).addClass('activated');
+						}
+				});
+				var src = [];
+				$('.bxslider li').each(function (i) {
+					src.push($(this).html());
+				});
+				$('.bxslider li img').each(function (i) {
+					$(this).html(src[i - 1]);
+					if (i == 0) {
+						$(this).html(src[src.length - 1]);
+					};
+				});
+				var src = [];
+				$('#pager a img').each(function (i) {
+					src.push($(this).attr("src"));
+				});
+				$('#pager a img').each(function (i) {
+					$(this).attr("src", src[i - 1]);
+					if (i == 0) {
+						$(this).attr("src", src[src.length - 1]);
+					};
+				});
+				var q = parseInt($('#pager').attr('data-count'));
+				$('#pager').attr('data-count', q+1);
+				if (q== src.length - 1)
+						$('#pager').attr('data-count', 0);
+			});
+			$('.bx-next').click(function () {
+				var x = -3;
+				var count = 0;
+				$('#pager a').each(function (i) {
+					count++;
+						if ($(this).hasClass('activated')){
+							x = i + 1;
+							$(this).removeClass('activated');
+						}
+						if(i==x){
+							$(this).addClass('activated');
+						}
+				});
+				if (count==x) {
+					$('#pager a.activated').removeClass('activated');
+					$('#pager a').first().addClass('activated');
+				}
+			});
+			$('.bx-prev').click(function () {
+				var x = -3;
+				var count = 0;
+				$('#pager a').each(function (i) {
+					count++;
+						if ($(this).hasClass('activated')){
+							x = i - 1;
+							$(this).removeClass('activated');
+						}
+				});
+				$('#pager a').each(function (i) {
+					if(i==x){
+							$(this).addClass('activated');
+						}
+				});
+				if (x==-1) {
+					$('#pager a.activated').removeClass('activated');
+					$('#pager a').last().addClass('activated');
+				}
+			});
+				(function($){
+		$.fn.extend({
+		center: function () {
+		return this.each(function() {
+		var top = ($(window).height() - $(this).outerHeight() -46) / 2;
+		var left = ($(window).width() - $(this).outerWidth()) / 2;
+		$(this).css({position:'absolute', margin:'25px 0', top: (top > 0 ? top : 0)+'px', left: (left > 0 ? left : 0)+'px'});
+		});
+		}
+		});
+		})(jQuery);
+		(function($){
+		$.fn.extend({
+		bottom: function () {
+		return this.each(function() {
+			var top = ($(window).height() + $('#center-block').position().top + $('#center-block').height() -50)/2;
+		var left = ($(window).width() - $(this).outerWidth());
+		$(this).css({position:'absolute', margin:0, top: (top > 0 ? top : 0)+'px', left: (left > 0 ? left : 0)+'px'});
+		});
+		}
+		});
+		})(jQuery);
+		(function($){
+		$.fn.extend({
+		bottoms: function () {
+		return this.each(function() {
+			var top = ($(window).height() + $('#center-block').position().top + $('#center-block').height())/2;
+		var left = ($(window).width() - $(this).outerWidth());
+		$(this).css({position:'absolute', margin:0, top: (top > 0 ? top : 0)+'px', left: (left > 0 ? left : 0)+'px'});
+		});
+		}
+		});
+		})(jQuery);
+		(function($){
+		$.fn.extend({
+		footer: function () {
+		return this.each(function() {
+		var top = ($(window).height() +  $('.photo-gallery').position().top + $('.photo-gallery').height()-200)/2;
+		var left = ($(window).width() - $(this).outerWidth());
+		$(this).css({position:'absolute', margin:0, top: (top > 0 ? top : 0)+'px', left: (left > 0 ? left : 0)+'px'});
+		});
+		}
+		});
+		})(jQuery);
+		(function($){
+		$.fn.extend({
+		footka: function () {
+		return this.each(function() {
+		var top = ($(window).height() +  $('.bx-wrapper').position().top + $('.bx-wrapper').height() -30)/2;
+		var left = ($(window).width() - $('.adsbygoogle').width())/2;
+		$(this).css({position:'absolute',left:left+'px', margin:0, top: (top > 0 ? top : 0)+'px'});
+		});
+		}
+		});
+		})(jQuery);
+		(function($){
+		$.fn.extend({
+		about: function () {
+		return this.each(function() {
+		var top = ($('#logo').position().top )/2;
+		
+		$(this).css({position:'absolute',margin:0, top: (top > 0 ? top : 0)+'px'});
+		});
+		}
+		});
+		})(jQuery);
+		(function($){
+		$.fn.extend({
+		arrow_left: function () {
+		return this.each(function() {
+		var left = $('#pager a').first().position().left - 40;
+		$(this).css('left', left);
+		console.log($('#pager a').first().position().left);
+		});
+		}
+		});
+		})(jQuery);
+		(function($){
+		$.fn.extend({
+		arrow_right: function () {
+		return this.each(function() {
+		var left = $('#pager a').first().position().left - 40;
+		var right = $('#pager a').last().position().left + $('#pager a').last().css('width') - 40;
+		$(this).css('right', left);
+		console.log($('#pager a').last().position().left);
+		});
+		}
+		});
+		})(jQuery);
+		setTimeout(function() {
+			$('.photo-gallery').bottom();
+		$('footer').footer();
+		$('.adsbygoogle').footka();
+		$('.fa-angle-left').arrow_left();
+		$('.fa-angle-right').arrow_right();
+		}, 500);
+		$('#center-block').center();
+		$('.about').about();
+			});
+		</script>
+<meta name="mailru-domain" content="OrAJV7UwtYUUHoxo" />
+<meta name="yandex-verification" content="b10d001f4180afb0" />
+	</head>
+	<body>
+		<div id="preloader">
+			<div class="spinner" id="status">
+				<div class="double-bounce1"></div>
+				<div class="double-bounce2"></div>
+			</div>
+		</div>
+		<section class='center' id='center-block'>
+			<article class=' left-column'>
+				<div class="" >
+					<a href="https://www.instagram.com/my80sbedroom/" target="_blank"><img src="pics/logo.jpg" class="logo" id='logo'alt=""></a>
+				</div>
+			</div>
+		</article>
+		<article class='right-column'>
+			<div class="rc">
+				<div class="about">
+					<!-- Welcome to My 80s Bedroom Radio! A memorabilia project dedicated to the teenage poster covered bedroom walls and playing new wave, post-punk and synthpop tapes of the era.<br><br>
+					Don't you want to make a journey through time? Join us, listen and see why this is your Mom and Dad's favorite station! -->
+				</div>
+				<div class='rtJpID' id="rtJpID-3"></div>
+				<div class="">
+					<a href="#" >
+						<img src="pics/play.png" id="play_btn-3" class="play" height="65" alt="">
+					</a>
+				</div>
+				<div class="song">
+					<div id="RTWidgetStatus" style="display:none;"></div>
+					<div class="song_author" id="song_author">asdf</div>
+					<div class="song_name" id="song_title">asdf</div>
+				</div>
+				<script>
+				$(document).ready(function () {
+				window.scroll(0,0);
+					var oldstr = "ghjkl";
+					setInterval(function() {
+						var str = $('#RTWidgetStatus').text();
+							$('#song_author').html(str.slice(0,str.indexOf(' - ')));
+							$('#song_title').html(str.slice(str.indexOf(' - ')+3));
+					},1000);
+					function marquee () {
+						if($('#song_author').html().length>=30){
+							var htmlString = $('#song_author').html();
+						$('#song_author').html("<marquee><span>" + htmlString + "</span></marquee>");
+						console.log('marq___'+htmlString+'___'+htmlString.length);
+						}
+					if($('.song_name').html().length>=30){
+						var htmlString = $('.song_name').html();
+					$('.song_name').html("<marquee><span>" + htmlString + "</span></marquee>");
+					}
+					}
+				});
+				</script>
+				<div class='fill'>
+					<div class="sp"><img src="pics/speaker.png"  class="speaker" alt=""></div><div class="slider" id="slider-3"></div>
+				</div>
+				<div class="btn-group">
+					<a class="bitrate-btn pill" id="4" href="#"><span style='visibility:hidden;'>1</span>96</a><a class="bitrate-btn pill " id="1" href="#">128</a><a class="bitrate-btn pill active" id="3" href="#">192</a>
+				</div>
+				<div class="players">
+					<a href="http://radio.my80sbedroomradio.com/radio/1/wmp.asx"><img src="pics/player-03.png" alt=""></a>
+					<a href="http://radio.my80sbedroomradio.com/radio/1/winamp.m3u"><img src="pics/player-04.png" alt=""></a>
+					<a href="http://radio.my80sbedroomradio.com/radio/1/itunes.pls"><img src="pics/player-05.png" alt=""></a>
+					<a href="http://radio.my80sbedroomradio.com/radio/1/realplayer.ram"><img src="pics/player-06.png" alt=""></a>
+				</div>
+			</div>
+		</article>
+	</section>
+		<footer>
+			<a class="mail" href="mailto:info@my80sbedroomradio.com">info@my80sbedroomradio.com</a><br>
+			<div class="copy">Copyright 2015 by My 80s Bedroom Radio</div>
+		</footer>
+<!--
+	<section class='photo-gallery' id='photo-gallery'>
+		<div id="bx-pager" class="bx-pager" >
+			<div class="outside">
+				<a href="#" id='slider-prev'><i class="fa fa-angle-left fa-3x" ></i></a>
+				<a href="#" id='slider-next'><i class="fa fa-angle-right fa-3x"></i></a>
+			</div>
+			<div id="pager" data-count="0"></div>
+		</div>
+		<ul id="bxslider" class="bxslider hidden">
+		</ul>
+		<div class="ad">
+			
+
+		</div>
+		<footer>
+			<a class="mail" href="mailto:info@my80sbedroomradio.com">info@my80sbedroomradio.com</a><br>
+			<div class="copy">Copyright 2015 by My 80s Bedroom Radio</div>
+		</footer>
+	</section>
+-->
+	<script>
+	$('.bitrate-btn').click(function (e) {
+		e.preventDefault();
+		$('.bitrate-btn.active').removeClass('active');
+		$(this).addClass('active');
+		var id = $(this).attr('id');
+		if (!$('#play_btn-3').hasClass('active')) {
+			$('#play_btn-3').click();
+		};
+		$('.rtJpID').jPlayer("stop");
+		switch(id){
+			case '1':
+				var link = 'http://radio.my80sbedroomradio.com:8000/radio';
+			break;
+			case '3':
+				var link = 'http://radio.my80sbedroomradio.com:8010/radio';
+			break;
+			case '4':
+				var link = 'http://radio.my80sbedroomradio.com:8020/radio';
+			break;
+		}
+		$('.rtJpID').jPlayer("setMedia", {
+	mp3: link
+	}).jPlayer("play");
+		});
+	</script>
+	<script>
+	$(document).ready(function () {
+		var i = 4;
+		var c = 0;
+		var timer;
+		$(window).on('mousewheel', function(event) {
+			if(!$('#bx-pager').hasClass('clicked') && i==1 && event.deltaY<1  && event.deltaY>-2){
+				}else if($('#bx-pager').hasClass('clicked') && i==2){
+				$('.bx-wrapper').show();
+				$('html, body').animate({
+			scrollTop: $("#bx-pager").offset().top
+				}, 'slow');
+				c = event.deltaY;
+				console.log(event.deltaY);
+				$('footer').show();
+				i = 3;
+			}else if( (i==3 && event.deltaY>c) || (event.deltaY>-1 && $('.bx-pager').hasClass('down') ) ){
+				$('.bx-pager').removeClass('clicked');
+				$('html, body').animate({
+			scrollTop: $("html").offset().top
+				}, 'slow');
+				i = 4;
+				c = event.deltaY;
+			}else if(i==4 && event.deltaY<c){
+				$('html, body').animate({
+			scrollTop: $("#bx-pager").offset().top
+				}, 'slow');
+				$('.bx-pager').addClass('clicked');
+				$('footer').show();
+				$('.bx-wrapper').show();
+				i = 3
+				c = event.deltaY;
+			}
+		});
+		var dir = "images/album/";
+		var fileextension = ".jpg";
+		$.ajax({
+		url: dir,
+		success: function (data) {
+		$(data).find("a:contains(" + fileextension + ")").each(function () {
+		var filename = this.href.replace(window.location.host, "").replace("http:///", "");
+		filename = 'images/album/'+filename;
+		$("#bxslider").append($("<li><img src=" +  filename + "></img></li>"));
+		});
+		}
+		});
+	});
+		
+	</script>
+
+	<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-61564722-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+</body>
+</html>
