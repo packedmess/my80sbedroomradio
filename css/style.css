@@ -101,3 +101,7 @@ button {
 .player__meta-artist {
   font-size: 16px;
 }
+
+.player__streaming {
+  display: none;
+}

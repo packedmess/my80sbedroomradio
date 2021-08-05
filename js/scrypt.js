@@ -34,10 +34,12 @@ playButton.addEventListener('click', () => {
   }
 });
 
-audio.addEventListener('playing', (event) => {
+audio.addEventListener('playing', () => {
   stopIcon.classList.remove('hidden');
   playIcon.classList.remove('loading');
   playIcon.classList.add('hidden');
 });
 
-console.log(volume.valueAsNumber);
+volume.addEventListener('change', () => {
+  audio.volume = volume.valueAsNumber / 100;
+});
