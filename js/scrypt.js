@@ -22,7 +22,7 @@ setInterval(() => {
 }, 1000);
 
 playButton.addEventListener('click', () => {
-  audio.src = audio.src === streamingUrl ? '' : streamingUrl;
+  audio.src = audio.src === streamingUrl ? '/' : streamingUrl;
 
   if (stopIcon.classList.contains('hidden')) {
     playIcon.classList.contains('loading')
@@ -41,7 +41,5 @@ audio.addEventListener('playing', () => {
 });
 
 volume.addEventListener('change', () => {
-  console.log(volume.valueAsNumber);
-
   audio.volume = volume.valueAsNumber / 100;
 });

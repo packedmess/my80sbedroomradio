@@ -8,6 +8,15 @@
   }
 }
 
+@keyframes scale {
+  0% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 body {
   min-width: 320px;
   font-family: 'Helvetica', Arial, sans-serif;
@@ -52,21 +61,24 @@ button {
 }
 
 .main {
-  display: flex;
+  position: relative;
   width: 100vw;
   height: 100vh;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
 }
 
-.container {
-  display: flex;
-  align-items: flex-end;
-  gap: 30px;
-  margin: 0 30px;
+.background {
+  width: 100vw;
+  height: 100vh;
+  background: url('../pics/background.webp') top / cover no-repeat;
+  animation: scale 10s ease-out;
 }
 
 .player {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -76,6 +88,7 @@ button {
 .player__wrapper {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 8px;
 }
 
@@ -109,10 +122,6 @@ button {
 
 .player__meta-artist {
   font-size: 14px;
-}
-
-.player__streaming {
-  display: none;
 }
 
 .player__volume-wrapper {
@@ -169,22 +178,8 @@ input[type='range']::-moz-range-track {
   cursor: pointer;
 }
 
-@media (max-width: 767px) {
-  .container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .player {
-    width: 100%;
-    flex-direction: row;
-  }
-
-  .player__wrapper {
-    flex-grow: 1;
-  }
-
-  input[type='range'] {
-    flex-grow: 1;
+@media (max-width: 768px) {
+  .background {
+    background: url('../pics/background.webp') left top / cover no-repeat;
   }
 }
