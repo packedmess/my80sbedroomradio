@@ -8,6 +8,17 @@
   }
 }
 
+@keyframes swirl-in-fwd {
+  0% {
+    transform: rotate(-900deg) scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(0) scale(1);
+    opacity: 1;
+  }
+}
+
 body {
   min-width: 320px;
   font-family: 'Caveat', cursive;
@@ -61,6 +72,7 @@ button {
 .logo__wrapper {
   position: relative;
   margin: 30px;
+  animation: swirl-in-fwd 1.2s ease-out both;
 }
 
 .logo__link {
@@ -119,10 +131,6 @@ button {
   font-weight: 600;
   transform: rotate(-1deg);
   margin-left: 5px;
-}
-
-.player__streaming {
-  display: none;
 }
 
 @media (max-width: 555px) {
