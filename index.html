@@ -4,6 +4,12 @@
     <meta charset="utf-8" />
     <title>My 80s Bedroom Radio</title>
     <link rel="shortcut icon" href="/pics/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
     <meta
       name="description"
       content="The 80s new wave, post-punk and synthpop online
@@ -22,19 +28,20 @@ radio"
   <body>
     <main class="main">
       <h1 class="visually-hidden">My 80s Bedroom Radio</h1>
-      <div class="container">
-        <a
+
+      <div class="logo__wrapper">
+        <img
+          src="pics/logo.webp"
+          class="logo__image"
+          id="logo"
+          alt="The polaroid photo with a guy from the 80's in his bedroom and 'My 80's bedroom' note"
+          width="495"
+          height="600"
+        /><a
           class="logo__link"
           href="https://www.instagram.com/my80sbedroom/"
           target="_blank"
-          ><img
-            src="pics/logo.jpg"
-            class="logo__image"
-            id="logo"
-            alt="The polaroid photo with a guy from the 80's in his bedroom and 'My 80's bedroom' note"
-            width="495"
-            height="600"
-        /></a>
+        ></a>
         <div class="player">
           <button class="player__play-button" type="button">
             <img
@@ -52,22 +59,12 @@ radio"
               height="80"
             />
           </button>
-          <div class="player__wrapper">
-            <div class="player__meta">
-              <div id="RTWidgetStatus" style="display: none"></div>
-              <div class="player__meta-artist">...</div>
-              <div class="player__meta-track">...</div>
-            </div>
-            <div class="player__volume-wrapper">
-              <img
-                class="player__volume-icon"
-                src="pics/speaker.svg"
-                alt=""
-                width="23"
-                height="23"
-              /><input type="range" class="player__volume" value="40" />
-            </div>
+          <div class="player__meta">
+            <div id="RTWidgetStatus" style="display: none"></div>
+            <div class="player__meta-artist"></div>
+            <div class="player__meta-track"></div>
           </div>
+
           <audio class="player__streaming" controls src="" autoplay></audio>
         </div>
       </div>
