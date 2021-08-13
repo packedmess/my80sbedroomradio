@@ -39,7 +39,3 @@ audio.addEventListener('playing', () => {
   playIcon.classList.remove('loading');
   playIcon.classList.add('hidden');
 });
-
-volume.addEventListener('change', () => {
-  audio.volume = volume.valueAsNumber / 100;
-});
