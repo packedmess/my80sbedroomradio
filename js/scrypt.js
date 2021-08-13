@@ -31,6 +31,7 @@ playButton.addEventListener('click', () => {
   } else {
     playIcon.classList.remove('hidden');
     stopIcon.classList.add('hidden');
+    playButton.setAttribute('aria-label', 'play');
   }
 });
 
@@ -38,4 +39,5 @@ audio.addEventListener('playing', () => {
   stopIcon.classList.remove('hidden');
   playIcon.classList.remove('loading');
   playIcon.classList.add('hidden');
+  playButton.setAttribute('aria-label', 'stop');
 });
